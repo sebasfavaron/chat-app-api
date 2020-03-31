@@ -1,31 +1,21 @@
-// const Stats = require('../models/product.model');
-// const mongoose = require('mongoose');
+const Mutant = require('../models/mutant.model');
+const mongoose = require('mongoose');
 
 class MutantsController {
     static async checkMutant(req, res, next) {
-        // try {
-        //     let products = Product.find({});
-        //     console.log(req.query);
-        //     products = apiController.APIController.checkParams(products, req.query);
-        //     const productsResult = await products.exec();
-        //     res.status(200).json({
-        //         message: 'Handling GET requests to /products',
-        //         result: productsResult
-        //     });
-        //   } catch (err) {
-        //     res.status(500).json({
-        //         message: err.message
-        //     });
-        //   }
-
-        // console.log(req.body);
-
         try {
             const mutantDNA = req.body.dna;
+            let isMutantDNA = isMutant(mutantDNA);
 
-            // console.log(mutantDNA);
+            const mutant = new Mutant({
+                _id: new mongoose.Types.ObjectId(),
+                dna: mutantDNA,
+                mutant: isMutantDNA
+            });
 
-            if (isMutant(mutantDNA)) {
+            await mutant.save();
+
+            if (isMutantDNA) {
                 res.status(200).json({
                     message: 'Mutant',
                     result: 'OK'
@@ -39,7 +29,7 @@ class MutantsController {
 
         } catch (error) {
             res.status(400).json({
-                message: 'Bad Request'
+                message: error
             });
         }
     }
@@ -64,8 +54,6 @@ class MutantsController {
             message: 'Handling GET requests to /stats',
             result: 'OK'
         });
-
-
     }
 }
 
@@ -119,7 +107,6 @@ function isMutant(dnaOriginal) {
             let dnaRow = dnaMatrix[indexRow];
             for (let indexCol in dnaRow) {
                 if (countADNStrings < 2) {
-                    let letter = dnaRow[indexCol];
                     if (!checkVisited([indexRow, indexCol])) {
                         // console.log('letra por chequear: ', letter + ' x: ' + indexRow + ' y: ' + indexCol);
                         checkDNA(parseInt(indexRow), parseInt(indexCol));
