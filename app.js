@@ -5,10 +5,6 @@ const bodyParser = require('body-parser');
 // // const mongoose = require('mongoose');
 
 const mutantsRoutes = require('./api/routes/mutants.routes');
-// const orderRoutes = require('./api/routes/orders.routes');
-// const authRoutes = require('./api/routes/authentication.routes');
-// const firebaseRoutes = require('./api/routes/firebase.routes');
-// const rethinkDBRoutes = require('./api/routes/rethinkDB.routes');
 
 // const config = require('./config');
 

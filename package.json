@@ -5,8 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon server.js",
-    "start:prod": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "deploy": "gcloud mutants app"
   },
   "author": "Juan Piza",
   "license": "ISC",
@@ -19,5 +19,11 @@
   "devDependencies": {
     "jest": "^25.2.4",
     "supertest": "^4.0.2"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

@@ -20,10 +20,10 @@ class MutantsController {
 
         // console.log(req.body);
 
-        // try {
+        try {
             const mutantDNA = req.body.dna;
 
-            console.log(mutantDNA);
+            // console.log(mutantDNA);
 
             if (isMutant(mutantDNA)) {
                 res.status(200).json({
@@ -32,15 +32,16 @@ class MutantsController {
                 });
             } else {
                 res.status(403).json({
-                    message: 'Human'
+                    message: 'Human',
+                    result: 'Forbidden'
                 });
             }
 
-        // } catch (error) {
-        //     res.status(403).json({
-        //         message: error.message
-        //     });
-        // }
+        } catch (error) {
+            res.status(400).json({
+                message: 'Bad Request'
+            });
+        }
     }
 
     static async getMutantsStats(req, res, next) {
@@ -77,24 +78,21 @@ function isMutant(dnaOriginal) {
 
     visited = [];
     countADNStrings = 0;
-
-    var responseMutant = true;
-
     dnaMatrix = [];
     matrixLenght = 0;
 
-    //se chequean las longitudes de los arrays y las letras
+    var responseMutant = true;
 
     for (let indexRow in dnaOriginal) {
         if (dnaOriginal[indexRow].length != dnaOriginal.length) {
-            console.error('row false length!');
+            // console.error('row false length!');
             responseMutant = false;
             break;
         } else {
             let arrayRow = dnaOriginal[indexRow].split('');
             for (let indexCol in arrayRow) {
                 if (!checkLetters(arrayRow[indexCol])) {
-                    console.error('letter false!');
+                    // console.error('letter false!');
                     responseMutant = false;
                     break;
                 }
@@ -111,7 +109,7 @@ function isMutant(dnaOriginal) {
 
     if (!responseMutant) return responseMutant;
 
-    console.log('DNA Matrix: ', dnaMatrix);
+    // console.log('DNA Matrix: ', dnaMatrix);
     matrixLenght = dnaMatrix.length;
 
     // Chequear las combinaciones
@@ -123,19 +121,19 @@ function isMutant(dnaOriginal) {
                 if (countADNStrings < 2) {
                     let letter = dnaRow[indexCol];
                     if (!checkVisited([indexRow, indexCol])) {
-                        console.log('letra por chequear: ', letter + ' x: ' + indexRow + ' y: ' + indexCol);
+                        // console.log('letra por chequear: ', letter + ' x: ' + indexRow + ' y: ' + indexCol);
                         checkDNA(parseInt(indexRow), parseInt(indexCol));
                     } else {
-                        console.error('letra chequeada', letter + ' x: ' + indexRow + ' y: ' + indexCol);
+                        // console.error('letra chequeada', letter + ' x: ' + indexRow + ' y: ' + indexCol);
                     }
                 } else {
-                    console.log('mas de una cadena');
+                    // console.log('mas de una cadena');
                     responseMutant = true;
                     break;
                 }
             }
         } else {
-            console.log('mas de una cadena');
+            // console.log('mas de una cadena');
             responseMutant = true;
             break;
         }
@@ -152,59 +150,75 @@ function checkLetters(letter) {
 
 function checkDNA(x, y) {
     let letter = dnaMatrix[x][y];
-    // console.log(typeof(x));
-    // console.log(typeof(y));
-    // console.log('x: '+x+ ' y: '+y);
-    // console.log('comparar: ' + dnaMatrix[x][y] + ' con: '+ dnaMatrix[x][y + 1]);
-    // console.log('es igual a la anterior: ', dnaMatrix[x][y] == dnaMatrix[x][y + 1]);
+    let secuenceFound = false;
+
     // Horizontal
-    if ((y + 3) < matrixLenght) {
+    if ((y + 3) < matrixLenght && !secuenceFound) {
         if (letter == dnaMatrix[x][y + 1] &&
             letter == dnaMatrix[x][y + 2] &&
             letter == dnaMatrix[x][y + 3]) {
-    
-                visited.push([x, y], [x, y + 1], [x, y + 2], [x, y + 3]);
-                countADNStrings++;
-                console.log('Se encontró una secuencia en x, visited: ', visited);
-                console.log('Secuencias: ', countADNStrings);
+                
+            if (!checkVisited([x, y + 1]) &&
+                !checkVisited([x, y + 2]) &&
+                !checkVisited([x, y + 3])) {
+                    visited.push([x, y], [x, y + 1], [x, y + 2], [x, y + 3]);
+                    countADNStrings++;
+                    secuenceFound = true;
+                    // console.log('Se encontró una secuencia en x, visited: ', visited);
+                    // console.log('Secuencias: ', countADNStrings);
+            }
         }
     }
 
     // Vertical
-    if ((x + 3) < matrixLenght) {
+    if ((x + 3) < matrixLenght && !secuenceFound) {
         if (letter == dnaMatrix[x + 1][y] &&
             letter == dnaMatrix[x + 2][y] &&
             letter == dnaMatrix[x + 3][y]) {
 
-                visited.push([x, y], [x + 1, y], [x + 2, y], [x + 3, y]);
-                countADNStrings++;
-                console.log('Se encontró una secuencia en y, visited: ', visited);
-                console.log('Secuencias: ', countADNStrings);
+            if (!checkVisited([x + 1, y]) &&
+                !checkVisited([x + 2, y]) &&
+                !checkVisited([x + 3, y])) {
+                    visited.push([x, y], [x + 1, y], [x + 2, y], [x + 3, y]);
+                    countADNStrings++;
+                    secuenceFound = true;
+                    // console.log('Se encontró una secuencia en y, visited: ', visited);
+                    // console.log('Secuencias: ', countADNStrings);
+            }
         }
     }   
     //Oblicuo L-R
-    if ((x + 3) < matrixLenght && (y + 3) < matrixLenght) {
+    if ((x + 3) < matrixLenght && (y + 3) < matrixLenght && !secuenceFound) {
         if (letter == dnaMatrix[x + 1][y + 1] &&
             letter == dnaMatrix[x + 2][y + 2] &&
             letter == dnaMatrix[x + 3][y + 3]) {
-    
-                visited.push([x, y], [x + 1, y + 1], [x + 2, y + 2], [x + 3, y + 3]);
-                countADNStrings++;
-                console.log('Se encontró una secuencia Oblicua L-R, visited: ', visited);
-                console.log('Secuencias: ', countADNStrings);
+
+            if (!checkVisited([x + 1, y + 1]) &&
+                !checkVisited([x + 2, y + 2]) &&
+                !checkVisited([x + 3, y + 3])) { 
+                    visited.push([x, y], [x + 1, y + 1], [x + 2, y + 2], [x + 3, y + 3]);
+                    countADNStrings++;
+                    secuenceFound = true;
+                    // console.log('Se encontró una secuencia Oblicua L-R, visited: ', visited);
+                    // console.log('Secuencias: ', countADNStrings);
+            }
         }
     }
     //Oblicuo R-L
-    if (y >= 3 && (x + 3) < matrixLenght) {
-        console.log('se chequea oblicua R-L');
+    if (y >= 3 && (x + 3) < matrixLenght && !secuenceFound) {
         if (letter == dnaMatrix[x + 1][y - 1] &&
             letter == dnaMatrix[x + 2][y - 2] &&
             letter == dnaMatrix[x + 3][y - 3]) {
-    
-                visited.push([x, y], [x + 1, y - 1], [x + 2, y - 2], [x + 3, y - 3]);
-                countADNStrings++;
-                console.log('Se encontró una secuencia Oblicua R-L, visited: ', visited);
-                console.log('Secuencias: ', countADNStrings);
+
+            if (!checkVisited([x + 1, y - 1]) &&
+                !checkVisited([x + 2, y - 2]) &&
+                !checkVisited([x + 3, y - 3])) { 
+                    visited.push([x, y], [x + 1, y - 1], [x + 2, y - 2], [x + 3, y - 3]);
+                    countADNStrings++;
+                    secuenceFound = true;
+                    // console.log('Se encontró una secuencia Oblicua R-L, visited: ', visited);
+                    // console.log('Secuencias: ', countADNStrings);
+            }
         }
     }
 }
