@@ -27,12 +27,12 @@ class MutantsController {
 
             if (isMutant(mutantDNA)) {
                 res.status(200).json({
-                    message: 'Handling GET requests to /mutants',
+                    message: 'Mutant',
                     result: 'OK'
                 });
             } else {
                 res.status(403).json({
-                    message: 'error'
+                    message: 'Human'
                 });
             }
 
@@ -141,6 +141,8 @@ function isMutant(dnaOriginal) {
         }
     }
 
+    if (countADNStrings < 2) responseMutant = false;
+
     return responseMutant;
 }
 
@@ -181,26 +183,27 @@ function checkDNA(x, y) {
         }
     }   
     //Oblicuo L-R
-    if ((x + 3) < matrixLenght) {
+    if ((x + 3) < matrixLenght && (y + 3) < matrixLenght) {
         if (letter == dnaMatrix[x + 1][y + 1] &&
             letter == dnaMatrix[x + 2][y + 2] &&
             letter == dnaMatrix[x + 3][y + 3]) {
     
                 visited.push([x, y], [x + 1, y + 1], [x + 2, y + 2], [x + 3, y + 3]);
                 countADNStrings++;
-                console.log('Se encontró una secuencia en Z L-R, visited: ', visited);
+                console.log('Se encontró una secuencia Oblicua L-R, visited: ', visited);
                 console.log('Secuencias: ', countADNStrings);
         }
     }
     //Oblicuo R-L
-    if (x >= 3 && y >= 3) {
-        if (letter == dnaMatrix[x - 1][y - 1] &&
-            letter == dnaMatrix[x - 2][y - 2] &&
-            letter == dnaMatrix[x - 3][y - 3]) {
+    if (y >= 3 && (x + 3) < matrixLenght) {
+        console.log('se chequea oblicua R-L');
+        if (letter == dnaMatrix[x + 1][y - 1] &&
+            letter == dnaMatrix[x + 2][y - 2] &&
+            letter == dnaMatrix[x + 3][y - 3]) {
     
-                visited.push([x, y], [x - 1, y - 1], [x - 2, y - 2], [x - 3, y - 3]);
+                visited.push([x, y], [x + 1, y - 1], [x + 2, y - 2], [x + 3, y - 3]);
                 countADNStrings++;
-                console.log('Se encontró una secuencia en Z R-L, visited: ', visited);
+                console.log('Se encontró una secuencia Oblicua R-L, visited: ', visited);
                 console.log('Secuencias: ', countADNStrings);
         }
     }
