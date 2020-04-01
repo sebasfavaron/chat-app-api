@@ -1,7 +1,14 @@
 const http = require('http');
 const app = require('./app');
-const port = process.env.port || 3000;
+const dbConnection = require('./connections/db_connection');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const port = process.env.NODE_ENV == 'dev' ? 3000 : 8080
 
 const server = http.createServer(app);
 
-server.listen(port);
+dbConnection.connectDb().then( async () => {
+    console.log('DB connected!');
+    server.listen(port);
+});

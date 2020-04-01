@@ -1,7 +1,14 @@
 const request = require('supertest')
 const app = require('../app')
+const dbConnection = require('../connections/db_connection');
 
 describe('Check Mutant Cross Test', () => {
+    beforeAll( async () => {
+        return dbConnection.connectDb().then( async () => {
+            console.log('DB connected!');
+        });
+    })
+
     it('Big DNA (10N) (Mutant)', async () => {
         const body = {
             "dna": [
@@ -103,5 +110,9 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+    })
+
+    afterAll( async () => {
+        return dbConnection.closeConnection();
     })
 })
