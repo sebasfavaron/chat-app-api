@@ -1,6 +1,7 @@
 const request = require('supertest')
 const app = require('../app')
 const dbConnection = require('../connections/db_connection');
+require("dotenv").config();
 
 
 describe('Check Mutant Simple Test', () => {

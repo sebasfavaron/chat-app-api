@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 
 class MutantsController {
     static async checkMutant(req, res, next) {
-        try {
+        if (req.body.dna != undefined){
             const mutantDNA = req.body.dna;
             let isMutantDNA = isMutant(mutantDNA);
 
@@ -27,9 +27,9 @@ class MutantsController {
                 });
             }
 
-        } catch (error) {
+        } else {
             res.status(400).json({
-                message: error
+                message: 'Bad Request'
             });
         }
     }

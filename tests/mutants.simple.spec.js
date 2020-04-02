@@ -1,6 +1,7 @@
 const request = require('supertest')
 const app = require('../app')
 const dbConnection = require('../connections/db_connection');
+require("dotenv").config();
 
 
 describe('Check Mutant Simple Test', () => {
@@ -143,6 +144,81 @@ describe('Check Mutant Simple Test', () => {
                 "TTATGT",
                 "TAATTG",
                 "ACGCTA"
+            ]
+        };
+        const res = await request(app)
+            .post('/mutants')
+            .send(body)
+        expect(res.statusCode).toEqual(403)
+    })
+
+    it('DNA Bad Request (empty body)', async () => {
+        const body = { };
+        const res = await request(app)
+            .post('/mutants')
+            .send(body)
+        expect(res.statusCode).toEqual(400)
+    })
+
+    it('DNA Bad Request (1)(Not NxN)', async () => {
+        const body = {
+            "dna": [
+                "ATGCGA",
+                "CAGTAC",
+                "AGGAAG",
+                "TTATGT",
+                "TCAGTG"
+            ]
+        };
+        const res = await request(app)
+            .post('/mutants')
+            .send(body)
+        expect(res.statusCode).toEqual(403)
+    })
+
+    it('DNA Bad Request (2)(Not NxN)', async () => {
+        const body = {
+            "dna": [
+                "ATGCGA",
+                "CAGTA",
+                "AGGAAG",
+                "TTATGT",
+                "TCAGTG",
+                "CCGCTA"
+            ]
+        };
+        const res = await request(app)
+            .post('/mutants')
+            .send(body)
+        expect(res.statusCode).toEqual(403)
+    })
+
+    it('DNA Bad Request (3)(Not NxN)', async () => {
+        const body = {
+            "dna": [
+                "ATGCGA",
+                "CAGTAC",
+                "AGGAAG",
+                "TTATGTA",
+                "TCAGTG",
+                "CCGCTA"
+            ]
+        };
+        const res = await request(app)
+            .post('/mutants')
+            .send(body)
+        expect(res.statusCode).toEqual(403)
+    })
+
+    it('DNA Bad Request (Letter False)', async () => {
+        const body = {
+            "dna": [
+                "ATGCGA",
+                "CAGTAC",
+                "AGGAAG",
+                "TTATGT",
+                "TCAGTG",
+                "CCGCTK"
             ]
         };
         const res = await request(app)
