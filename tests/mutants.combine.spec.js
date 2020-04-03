@@ -5,12 +5,12 @@ require("dotenv").config();
 
 describe('Check Mutant Combine Test', () => {
     beforeAll( async () => {
-        return dbConnection.connectDb().then( async () => {
+        return dbConnection.connectDb(process.env.DB_NAME_TEST).then( async () => {
             console.log('DB connected!');
         });
     })
 
-    it('DNA Vertical - Horizontal (Mutant)', async () => {
+    it('DNA Vertical - Horizontal (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGT",
@@ -26,8 +26,9 @@ describe('Check Mutant Combine Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     }),
-    it('DNA Vertical - Oblicuo R-L (Mutant)', async () => {
+    it('DNA Vertical - Oblicuo R-L (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -43,8 +44,9 @@ describe('Check Mutant Combine Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     }),
-    it('DNA Vertical - Oblicuo L-R (Mutant)', async () => {
+    it('DNA Vertical - Oblicuo L-R (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -60,8 +62,9 @@ describe('Check Mutant Combine Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     }),
-    it('DNA Horizontal - Oblicuo L-R (Mutant)', async () => {
+    it('DNA Horizontal - Oblicuo L-R (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -77,8 +80,9 @@ describe('Check Mutant Combine Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     }),
-    it('DNA Horizontal - Oblicuo R-L (Mutant)', async () => {
+    it('DNA Horizontal - Oblicuo R-L (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -94,8 +98,9 @@ describe('Check Mutant Combine Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     }),
-    it('DNA Oblicuos L-R y R-L (Mutant)', async () => {
+    it('DNA Oblicuos L-R y R-L (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGAC",
@@ -112,6 +117,7 @@ describe('Check Mutant Combine Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     })
 
     afterAll( async () => {

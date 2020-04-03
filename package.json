@@ -4,8 +4,8 @@
   "description": "mutants recon app",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "jest --coverage mutants OpenHandles",
+    "start": "node server.js",
+    "test": "jest -i --coverage --detectOpenHandles",
     "deploy": "gcloud mutants app"
   },
   "author": "Juan Piza",

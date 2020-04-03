@@ -5,12 +5,12 @@ require("dotenv").config();
 
 describe('Check Mutant Cross Test', () => {
     beforeAll( async () => {
-        return dbConnection.connectDb().then( async () => {
+        return dbConnection.connectDb(process.env.DB_NAME_TEST).then( async () => {
             console.log('DB connected!');
         });
     })
 
-    it('Big DNA (10N) (Mutant)', async () => {
+    it('Big DNA (10N) (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "CGGGCACCGC",
@@ -29,9 +29,10 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
 
-    it('Big DNA (10N) (Human)', async () => {
+    it('Big DNA (10N) (Human)', async (done) => {
         const body = {
             "dna": [
                 "CGGGCACCGC",
@@ -50,9 +51,10 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(403)
+        done()
     })
 
-    it('Big DNA (50N) (Mutant)', async () => {
+    it('Big DNA (50N) (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "AGACACTATAGACCTTGTTTGGCGGGTGGTAGATGAAAGGGCTGGGTTTA",
@@ -111,6 +113,7 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
 
     afterAll( async () => {

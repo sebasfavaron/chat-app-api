@@ -5,12 +5,12 @@ require("dotenv").config();
 
 describe('Check Mutant Cross Test', () => {
     beforeAll( async () => {
-        return dbConnection.connectDb().then( async () => {
+        return dbConnection.connectDb(process.env.DB_NAME_TEST).then( async () => {
             console.log('DB connected!');
         });
     })
 
-    it('DNA Vertical - Horizontal (1)(Mutant)', async () => {
+    it('DNA Vertical - Horizontal (1)(Mutant)', async (done) => {
         const body = {
             "dna": [
                 "AAAAGT",
@@ -25,8 +25,9 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
-    it('DNA Vertical - Oblicuo R-L (Mutant)', async () => {
+    it('DNA Vertical - Oblicuo R-L (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGAGA",
@@ -41,8 +42,9 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
-    it('DNA Oblicuos L-R y R-L (Mutant)', async () => {
+    it('DNA Oblicuos L-R y R-L (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "GTGCGAC",
@@ -58,8 +60,9 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
-    it('DNA Vertical - Horizontal (2)(Mutant)', async () => {
+    it('DNA Vertical - Horizontal (2)(Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATAAGT",
@@ -74,9 +77,10 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
 
-    it('DNA Vertical + letters (Human)', async () => {
+    it('DNA Vertical + letters (Human)', async (done) => {
         const body = {
             "dna": [
                 "AAGAGT",
@@ -91,9 +95,10 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(403)
+        done()
     })
 
-    it('DNA Horizontal + letters (Human)', async () => {
+    it('DNA Horizontal + letters (Human)', async (done) => {
         const body = {
             "dna": [
                 "GGGGGT",
@@ -108,9 +113,10 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(403)
+        done()
     })
 
-    it('DNA Vertical + letters (Mutant)', async () => {
+    it('DNA Vertical + letters (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "AAGAGTTT",
@@ -127,9 +133,10 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
 
-    it('DNA Horizontal + letters (Mutant)', async () => {
+    it('DNA Horizontal + letters (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "AATAATTT",
@@ -146,6 +153,7 @@ describe('Check Mutant Cross Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(200)
+        done()
     })
 
     afterAll( async () => {

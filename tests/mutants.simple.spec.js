@@ -6,12 +6,12 @@ require("dotenv").config();
 
 describe('Check Mutant Simple Test', () => {
     beforeAll( async () => {
-        return dbConnection.connectDb().then( async () => {
+        return dbConnection.connectDb(process.env.DB_NAME_TEST).then( async () => {
             console.log('DB connected!');
         });
     })
 
-    it('DNA Horizontal (Mutant)', async () => {
+    it('DNA Horizontal (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -27,9 +27,10 @@ describe('Check Mutant Simple Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     })
 
-    it('DNA Horizontal Extended (Human)', async () => {
+    it('DNA Horizontal Extended (Human)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -44,9 +45,10 @@ describe('Check Mutant Simple Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(403)
+        done()
     })
 
-    it('DNA Vertical (Mutant)', async () => {
+    it('DNA Vertical (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -62,9 +64,10 @@ describe('Check Mutant Simple Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     })
 
-    it('DNA Vertical Extended (Human)', async () => {
+    it('DNA Vertical Extended (Human)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -79,9 +82,10 @@ describe('Check Mutant Simple Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(403)
+        done()
     })
 
-    it('DNA Oblicuo L-R (Mutant)', async () => {
+    it('DNA Oblicuo L-R (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -97,10 +101,11 @@ describe('Check Mutant Simple Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     })
 
     
-    it('DNA Oblicuo L-R Extended (Human)', async () => {
+    it('DNA Oblicuo L-R Extended (Human)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -115,9 +120,10 @@ describe('Check Mutant Simple Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(403)
+        done()
     })
 
-    it('DNA Oblicuo R-L (Mutant)', async () => {
+    it('DNA Oblicuo R-L (Mutant)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -133,9 +139,10 @@ describe('Check Mutant Simple Test', () => {
             .send(body)
         expect(res.statusCode).toEqual(200)
         expect(res.body.result).toEqual('OK')
+        done()
     })
 
-    it('DNA Oblicuo R-L Extended (Human)', async () => {
+    it('DNA Oblicuo R-L Extended (Human)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -150,17 +157,30 @@ describe('Check Mutant Simple Test', () => {
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(403)
+        done()
     })
 
-    it('DNA Bad Request (empty body)', async () => {
+    it('DNA Bad Request (empty body)', async (done) => {
         const body = { };
         const res = await request(app)
             .post('/mutants')
             .send(body)
         expect(res.statusCode).toEqual(400)
+        done()
     })
 
-    it('DNA Bad Request (1)(Not NxN)', async () => {
+    it('DNA Bad Request (empty dna array)', async (done) => {
+        const body = {
+            "dna": []
+        };
+        const res = await request(app)
+            .post('/mutants')
+            .send(body)
+        expect(res.statusCode).toEqual(400)
+        done()
+    })
+
+    it('DNA Bad Request (1)(Not NxN)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -173,10 +193,11 @@ describe('Check Mutant Simple Test', () => {
         const res = await request(app)
             .post('/mutants')
             .send(body)
-        expect(res.statusCode).toEqual(403)
+        expect(res.statusCode).toEqual(400)
+        done()
     })
 
-    it('DNA Bad Request (2)(Not NxN)', async () => {
+    it('DNA Bad Request (2)(Not NxN)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -190,10 +211,11 @@ describe('Check Mutant Simple Test', () => {
         const res = await request(app)
             .post('/mutants')
             .send(body)
-        expect(res.statusCode).toEqual(403)
+        expect(res.statusCode).toEqual(400)
+        done()
     })
 
-    it('DNA Bad Request (3)(Not NxN)', async () => {
+    it('DNA Bad Request (3)(Not NxN)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -207,10 +229,11 @@ describe('Check Mutant Simple Test', () => {
         const res = await request(app)
             .post('/mutants')
             .send(body)
-        expect(res.statusCode).toEqual(403)
+        expect(res.statusCode).toEqual(400)
+        done()
     })
 
-    it('DNA Bad Request (Letter False)', async () => {
+    it('DNA Bad Request (Letter False)', async (done) => {
         const body = {
             "dna": [
                 "ATGCGA",
@@ -224,7 +247,8 @@ describe('Check Mutant Simple Test', () => {
         const res = await request(app)
             .post('/mutants')
             .send(body)
-        expect(res.statusCode).toEqual(403)
+        expect(res.statusCode).toEqual(400)
+        done()
     })
 
     afterAll( async () => {
