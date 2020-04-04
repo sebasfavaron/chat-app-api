@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1585919823123" clover="3.2.0">
-  <project timestamp="1585919823124" name="All files">
-    <metrics statements="128" coveredstatements="127" conditionals="114" coveredconditionals="106" methods="15" coveredmethods="15" elements="257" coveredelements="248" complexity="0" loc="128" ncloc="128" packages="6" files="6" classes="6"/>
+<coverage generated="1585960126629" clover="3.2.0">
+  <project timestamp="1585960126630" name="All files">
+    <metrics statements="128" coveredstatements="127" conditionals="116" coveredconditionals="108" methods="15" coveredmethods="15" elements="259" coveredelements="250" complexity="0" loc="128" ncloc="128" packages="6" files="6" classes="6"/>
     <package name="mutants">
       <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="C:\Users\juanpiza\Documents\projects\mutants\app.js">
@@ -19,17 +19,16 @@
       </file>
     </package>
     <package name="mutants.api.controllers">
-      <metrics statements="22" coveredstatements="21" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
+      <metrics statements="21" coveredstatements="20" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
       <file name="mutants.controller.js" path="C:\Users\juanpiza\Documents\projects\mutants\api\controllers\mutants.controller.js">
-        <metrics statements="22" coveredstatements="21" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
+        <metrics statements="21" coveredstatements="20" conditionals="8" coveredconditionals="7" methods="2" coveredmethods="2"/>
         <line num="1" count="6" type="stmt"/>
         <line num="2" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
         <line num="7" count="31" type="cond" truecount="2" falsecount="0"/>
         <line num="8" count="30" type="stmt"/>
-        <line num="9" count="30" type="stmt"/>
-        <line num="11" count="30" type="cond" truecount="2" falsecount="0"/>
-        <line num="12" count="25" type="stmt"/>
+        <line num="10" count="30" type="stmt"/>
+        <line num="12" count="30" type="cond" truecount="2" falsecount="0"/>
         <line num="14" count="25" type="stmt"/>
         <line num="20" count="25" type="stmt"/>
         <line num="22" count="25" type="cond" truecount="2" falsecount="0"/>
@@ -47,9 +46,9 @@
       </file>
     </package>
     <package name="mutants.api.lib">
-      <metrics statements="78" coveredstatements="78" conditionals="102" coveredconditionals="98" methods="10" coveredmethods="10"/>
+      <metrics statements="79" coveredstatements="79" conditionals="104" coveredconditionals="100" methods="10" coveredmethods="10"/>
       <file name="mutants.lib.js" path="C:\Users\juanpiza\Documents\projects\mutants\api\lib\mutants.lib.js">
-        <metrics statements="78" coveredstatements="78" conditionals="102" coveredconditionals="98" methods="10" coveredmethods="10"/>
+        <metrics statements="79" coveredstatements="79" conditionals="104" coveredconditionals="100" methods="10" coveredmethods="10"/>
         <line num="1" count="6" type="stmt"/>
         <line num="2" count="6" type="stmt"/>
         <line num="3" count="6" type="stmt"/>
@@ -74,60 +73,61 @@
         <line num="34" count="1" type="stmt"/>
         <line num="40" count="1" type="stmt"/>
         <line num="42" count="30" type="stmt"/>
-        <line num="47" count="25" type="stmt"/>
-        <line num="53" count="25" type="stmt"/>
-        <line num="54" count="25" type="stmt"/>
-        <line num="55" count="25" type="stmt"/>
+        <line num="47" count="30" type="stmt"/>
+        <line num="53" count="30" type="stmt"/>
+        <line num="54" count="30" type="stmt"/>
+        <line num="56" count="30" type="cond" truecount="2" falsecount="0"/>
         <line num="58" count="25" type="stmt"/>
-        <line num="59" count="125" type="cond" truecount="2" falsecount="0"/>
-        <line num="60" count="111" type="stmt"/>
-        <line num="61" count="111" type="stmt"/>
-        <line num="62" count="1005" type="cond" truecount="2" falsecount="0"/>
-        <line num="63" count="990" type="stmt"/>
-        <line num="65" count="15" type="stmt"/>
-        <line num="69" count="14" type="stmt"/>
-        <line num="73" count="25" type="stmt"/>
-        <line num="77" count="3634" type="cond" truecount="4" falsecount="0"/>
-        <line num="81" count="990" type="stmt"/>
-        <line num="84" count="990" type="cond" truecount="5" falsecount="0"/>
-        <line num="85" count="696" type="cond" truecount="5" falsecount="0"/>
-        <line num="89" count="10" type="stmt"/>
-        <line num="90" count="10" type="cond" truecount="4" falsecount="1"/>
-        <line num="93" count="10" type="stmt"/>
-        <line num="94" count="10" type="stmt"/>
-        <line num="100" count="990" type="cond" truecount="5" falsecount="0"/>
-        <line num="101" count="770" type="cond" truecount="5" falsecount="0"/>
-        <line num="105" count="15" type="stmt"/>
-        <line num="106" count="15" type="cond" truecount="4" falsecount="1"/>
-        <line num="109" count="15" type="stmt"/>
-        <line num="110" count="15" type="stmt"/>
-        <line num="115" count="990" type="cond" truecount="6" falsecount="0"/>
-        <line num="116" count="571" type="cond" truecount="5" falsecount="0"/>
-        <line num="120" count="9" type="stmt"/>
-        <line num="122" count="9" type="cond" truecount="4" falsecount="1"/>
-        <line num="125" count="9" type="stmt"/>
-        <line num="126" count="9" type="stmt"/>
-        <line num="131" count="990" type="cond" truecount="6" falsecount="0"/>
-        <line num="132" count="547" type="cond" truecount="5" falsecount="0"/>
-        <line num="136" count="8" type="stmt"/>
-        <line num="137" count="8" type="cond" truecount="4" falsecount="1"/>
-        <line num="140" count="8" type="stmt"/>
-        <line num="141" count="8" type="stmt"/>
-        <line num="148" count="2745" type="cond" truecount="4" falsecount="0"/>
-        <line num="150" count="730" type="cond" truecount="4" falsecount="0"/>
-        <line num="154" count="827" type="cond" truecount="4" falsecount="0"/>
-        <line num="158" count="606" type="cond" truecount="4" falsecount="0"/>
-        <line num="162" count="582" type="cond" truecount="4" falsecount="0"/>
-        <line num="169" count="42" type="cond" truecount="4" falsecount="0"/>
-        <line num="171" count="10" type="stmt"/>
-        <line num="172" count="10" type="stmt"/>
-        <line num="174" count="15" type="stmt"/>
-        <line num="175" count="15" type="stmt"/>
-        <line num="177" count="9" type="stmt"/>
-        <line num="178" count="9" type="stmt"/>
-        <line num="180" count="8" type="stmt"/>
-        <line num="181" count="8" type="stmt"/>
-        <line num="185" count="6" type="stmt"/>
+        <line num="61" count="25" type="stmt"/>
+        <line num="62" count="125" type="cond" truecount="2" falsecount="0"/>
+        <line num="63" count="111" type="stmt"/>
+        <line num="64" count="111" type="stmt"/>
+        <line num="65" count="1005" type="cond" truecount="2" falsecount="0"/>
+        <line num="66" count="990" type="stmt"/>
+        <line num="68" count="15" type="stmt"/>
+        <line num="72" count="14" type="stmt"/>
+        <line num="76" count="25" type="stmt"/>
+        <line num="80" count="3634" type="cond" truecount="4" falsecount="0"/>
+        <line num="84" count="990" type="stmt"/>
+        <line num="87" count="990" type="cond" truecount="5" falsecount="0"/>
+        <line num="88" count="696" type="cond" truecount="5" falsecount="0"/>
+        <line num="92" count="10" type="stmt"/>
+        <line num="93" count="10" type="cond" truecount="4" falsecount="1"/>
+        <line num="96" count="10" type="stmt"/>
+        <line num="97" count="10" type="stmt"/>
+        <line num="103" count="990" type="cond" truecount="5" falsecount="0"/>
+        <line num="104" count="770" type="cond" truecount="5" falsecount="0"/>
+        <line num="108" count="15" type="stmt"/>
+        <line num="109" count="15" type="cond" truecount="4" falsecount="1"/>
+        <line num="112" count="15" type="stmt"/>
+        <line num="113" count="15" type="stmt"/>
+        <line num="118" count="990" type="cond" truecount="6" falsecount="0"/>
+        <line num="119" count="571" type="cond" truecount="5" falsecount="0"/>
+        <line num="123" count="9" type="stmt"/>
+        <line num="125" count="9" type="cond" truecount="4" falsecount="1"/>
+        <line num="128" count="9" type="stmt"/>
+        <line num="129" count="9" type="stmt"/>
+        <line num="134" count="990" type="cond" truecount="6" falsecount="0"/>
+        <line num="135" count="547" type="cond" truecount="5" falsecount="0"/>
+        <line num="139" count="8" type="stmt"/>
+        <line num="140" count="8" type="cond" truecount="4" falsecount="1"/>
+        <line num="143" count="8" type="stmt"/>
+        <line num="144" count="8" type="stmt"/>
+        <line num="151" count="2745" type="cond" truecount="4" falsecount="0"/>
+        <line num="153" count="730" type="cond" truecount="4" falsecount="0"/>
+        <line num="157" count="827" type="cond" truecount="4" falsecount="0"/>
+        <line num="161" count="606" type="cond" truecount="4" falsecount="0"/>
+        <line num="165" count="582" type="cond" truecount="4" falsecount="0"/>
+        <line num="172" count="42" type="cond" truecount="4" falsecount="0"/>
+        <line num="174" count="10" type="stmt"/>
+        <line num="175" count="10" type="stmt"/>
+        <line num="177" count="15" type="stmt"/>
+        <line num="178" count="15" type="stmt"/>
+        <line num="180" count="9" type="stmt"/>
+        <line num="181" count="9" type="stmt"/>
+        <line num="183" count="8" type="stmt"/>
+        <line num="184" count="8" type="stmt"/>
+        <line num="188" count="6" type="stmt"/>
       </file>
     </package>
     <package name="mutants.api.models">

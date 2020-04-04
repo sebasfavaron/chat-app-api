@@ -6,10 +6,10 @@ class MutantsController {
     static async checkMutant(req, res, next) {
         if (req.body.dna != undefined){
             const mutantDNA = req.body.dna;
-            let mutantMatrix = mutantsLib.validateDNA(mutantDNA);
+
+            const isMutantDNA = mutantsLib.isMutant(mutantDNA);
             
-            if (mutantMatrix != undefined) {
-                let isMutantDNA = mutantsLib.isMutant(mutantMatrix);
+            if (isMutantDNA != undefined) {
 
                 const mutant = new Mutant({
                     _id: new mongoose.Types.ObjectId(),

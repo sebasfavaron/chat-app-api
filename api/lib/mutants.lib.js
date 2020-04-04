@@ -42,7 +42,7 @@ function validateDNA(dnaOriginal) {
     return matrix;
 }
 
-function isMutant(matrix) {
+function isMutant(dnaOriginal) {
 
     visited = {
         x: [],
@@ -51,7 +51,10 @@ function isMutant(matrix) {
         rl: []
     };
     countADNStrings = 0;
-    dnaMatrix = matrix;
+    dnaMatrix = validateDNA(dnaOriginal);
+
+    if(dnaMatrix == undefined) return undefined;
+
     matrixLenght = dnaMatrix.length;
 
     // Check combinations
@@ -182,4 +185,4 @@ function setVisited(coords, axis) {
     }
 }
 
-module.exports = { isMutant, validateDNA };
+module.exports = { isMutant };
