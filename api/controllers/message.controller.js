@@ -5,7 +5,10 @@ const messagesLib = require('../lib/messages.lib');
 class MessagesController {
     static async getMessages(req, res, next) {
         try {
-            const messages = await Message.find({}).exec();
+            var filter = {}
+            if (req.query.uid) filter['uid'] = req.query.uid
+            if (req.query.recipient) filter['recipient'] = req.query.recipient
+            const messages = await Message.find(filter).exec();
 
             res.status(200).json({
                 data: messages
