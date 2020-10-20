@@ -8,7 +8,7 @@ const port = process.env.NODE_ENV == 'dev' ? 3000 : 8080;
 
 const server = http.createServer(app);
 
-dbConnection.connectDb().then( async () => {
+dbConnection.connectDb().then(async () => {
     console.log('DB connected!');
     server.listen(port);
 });
