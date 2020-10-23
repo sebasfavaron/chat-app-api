@@ -19,7 +19,8 @@ const conversationSchema = mongoose.Schema({
     time_last_message: String,
     selected: Boolean,
     color: String,
-    avatar: String
+    avatar: String,
+    archived: Boolean
 }, { timestamps: true });
 
 module.exports = mongoose.model('Conversation', conversationSchema);

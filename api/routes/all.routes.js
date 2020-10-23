@@ -15,7 +15,7 @@ router.get('/users', userCtrl.UserController.getUsers);
 router.get('/user', userCtrl.UserController.getUser);
 router.post('/user', userCtrl.UserController.postUser);
 
-router.get('/conversation', conversationCtrl.ConversationController.getConversation);
+router.get('/conversations', conversationCtrl.ConversationController.getConversations);
 router.post('/conversation', conversationCtrl.ConversationController.postConversation);
 
 // router.post('/mutants', mutantsCtrl.MutantsController.checkMutant);

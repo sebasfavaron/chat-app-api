@@ -41,17 +41,17 @@ class UserController {
 
             const user = new User({
                 // _id: new ObjectID(),
-                uid: req.body.uid,
-                email: req.body.email,
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                fullname: req.body.fullname,
-                imageurl: req.body.imageurl,
-                avatar: req.body.avatar,
-                color: req.body.color,
-                checked: req.body.checked,
-                online: req.body.online,
-                decoded: req.body.decoded
+                uid: req.body.uid || "1",
+                email: req.body.email || "",
+                firstname: req.body.firstname || "",
+                lastname: req.body.lastname || "",
+                fullname: req.body.fullname || "",
+                imageurl: req.body.imageurl || "",
+                avatar: req.body.avatar || "",
+                color: req.body.color || "grey",
+                checked: req.body.checked || true,
+                online: req.body.online || true,
+                decoded: req.body.decoded || ""
             });
 
             user.save(function (err, message) {
