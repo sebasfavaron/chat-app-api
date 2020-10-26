@@ -1,6 +1,6 @@
 const Message = require('../models/message.model');
 const mongoose = require('mongoose');
-const messagesLib = require('../lib/messages.lib');
+// const messagesLib = require('../lib/messages.lib');
 
 class MessagesController {
     static async getMessages(req, res, next) {
